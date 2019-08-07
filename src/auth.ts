@@ -4,13 +4,6 @@ import { isEmpty } from 'lodash';
 import fetch from 'node-fetch';
 import { User } from './user';
 
-/**
- * Gets the authentication context for the specified user
- *
- * @private
- * @param {APIGatewayEvent} event
- */
-
 const jwkToPem = require('jwk-to-pem');
 
 const _log = getLogger('');
@@ -70,7 +63,7 @@ export const getAuthContext = async (headers: { [name: string]: string }, {awsRe
 					_log.debug('Unauthorized user:', err.message);
 					reject(err);
 				} else {
-					resolve(new User(decoded.username, decoded));
+					resolve(new User(decoded));
 				}
 			})
 		);

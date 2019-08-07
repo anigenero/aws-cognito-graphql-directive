@@ -4,17 +4,14 @@ export class User {
 
 	private _cognitoId: string;
 	private _groups: Set<string>;
-	private _payload: any;
-	private _username: string;
 
-	constructor(username?: string, payload?: any) {
+	constructor(private _payload?: any) {
 
-		if (username) {
+		if (_payload) {
 
 			this._anonymous = false;
-			this._cognitoId = payload.sub;
-			this._groups = new Set(payload['cognito:groups']);
-			this._username = username;
+			this._cognitoId = _payload.sub;
+			this._groups = new Set(_payload['cognito:groups']);
 
 		} else {
 			this._anonymous = true;
