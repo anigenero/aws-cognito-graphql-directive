@@ -7,7 +7,6 @@ script:
   - 'npm run lint'
   - 'npm test'
   - 'npm run build'
-  - 'npm run posttest'
 deploy:
   skip_cleanup: true
   on:

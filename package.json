@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "tslint -p tsconfig.json -c tslint.json",
-    "posttest": "codecov -f coverage/*.json",
+    "posttest": "codecov -f coverage/lcov.info",
     "test": "jest"
   },
   "repository": {
