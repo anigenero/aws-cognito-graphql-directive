@@ -1,0 +1,17 @@
+.idea
+
+/coverage
+/logs
+/src
+
+.travis.yml
+
+jest.setup.ts
+jest.graphql.js
+jest.config.js
+
+tsconfig.json
+tslint.json
+
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md

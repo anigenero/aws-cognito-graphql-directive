@@ -1,0 +1,3 @@
+directive @auth(
+    groups: [String]
+) on FIELD_DEFINITION

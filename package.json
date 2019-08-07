@@ -1,0 +1,58 @@
+{
+  "name": "aws-cognito-graphql-directive",
+  "version": "1.0.0",
+  "description": "Directive to check authentication against AWS cognito",
+  "keywords": [
+    "aws",
+    "cognito",
+    "graphql",
+    "directive"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index",
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "posttest": "codecov -f coverage/*.json",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anigenero/aws-cognito-graphql-directive.git"
+  },
+  "author": {
+    "name": "Robin Schultz",
+    "email": "robin@anigenero.com",
+    "url": "https://github.com/anigenero"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anigenero/aws-cognito-graphql-directive/issues"
+  },
+  "homepage": "https://github.com/anigenero/aws-cognito-graphql-directive#readme",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.31",
+    "@types/graphql": "^14.2.3",
+    "@types/jest": "^24.0.17",
+    "@types/jsonwebtoken": "^8.3.2",
+    "@types/lodash": "^4.14.136",
+    "@types/node-fetch": "^2.5.0",
+    "graphql-tools": "^4.0.5",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "tslint-sonarts": "^1.9.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "@log4js2/core": "^2.0.9",
+    "graphql": "^14.4.2",
+    "graphql-tag": "^2.10.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.1",
+    "lodash": "^4.17.15",
+    "node-fetch": "^2.6.0"
+  }
+}
