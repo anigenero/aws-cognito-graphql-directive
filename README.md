@@ -1,4 +1,8 @@
 # aws-cognito-graphql-directive
+
+[![Build Status](https://travis-ci.org/anigenero/aws-cognito-graphql-directive.svg?branch=master)](https://travis-ci.org/anigenero/aws-cognito-graphql-directive)
+[![codecov](https://codecov.io/gh/anigenero/aws-cognito-graphql-directive/branch/master/graph/badge.svg)](https://codecov.io/gh/anigenero/aws-cognito-graphql-directive)
+
 Directive to check authentication against AWS cognito
 
 ## Installation
