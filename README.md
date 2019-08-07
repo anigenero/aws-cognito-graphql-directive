@@ -13,8 +13,8 @@ Directive to check authentication against AWS cognito
 import { AuthDirective, authTypeDefs, getAuthContext } from 'aws-cognito-graphql-drective';
 
 const generateContext: ContextFunction<{event: APIGatewayEvent}, MyGraphQLContext> =
-	async ({event}) => ({
-		auth: await getAuthContext(event, {
+	async ({event: {headers}}) => ({
+		auth: await getAuthContext(headers, {
                 awsRegion: '',
                 userPoolId: ''		
             })

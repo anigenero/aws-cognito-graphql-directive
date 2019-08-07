@@ -1,5 +1,4 @@
 import { getLogger } from '@log4js2/core';
-import { APIGatewayEvent } from 'aws-lambda';
 import * as jwt from 'jsonwebtoken';
 import { isEmpty } from 'lodash';
 import fetch from 'node-fetch';
@@ -23,7 +22,7 @@ export interface IAuthConfig {
 
 }
 
-export const getAuthContext = async (event: APIGatewayEvent, {awsRegion, userPoolId}: IAuthConfig): Promise<User> => {
+export const getAuthContext = async (headers: { [name: string]: string }, {awsRegion, userPoolId}: IAuthConfig): Promise<User> => {
 
 	const _issuer = `https://cognito-idp.${awsRegion}.amazonaws.com/${userPoolId}`;
 
@@ -125,12 +124,12 @@ export const getAuthContext = async (event: APIGatewayEvent, {awsRegion, userPoo
 
 	return await (async (): Promise<User> => {
 
-		if (event.headers.hasOwnProperty('Authorization')) {
+		if (headers.hasOwnProperty('Authorization')) {
 
-			const authHeader = event.headers.Authorization;
-			if (!isEmpty(authHeader)) {
+			const {Authorization} = headers;
+			if (!isEmpty(Authorization)) {
 				try {
-					return await _getUserFromToken(authHeader);
+					return await _getUserFromToken(Authorization);
 				} catch (e) {
 					_log.error('There was an error while determining the auth context', e);
 				}
