@@ -12,13 +12,13 @@ Directive to check authentication against AWS cognito
 ```typescript
 import { AuthDirective, authTypeDefs, getAuthContext } from 'aws-cognito-graphql-drective';
 
-const generateContext: ContextFunction<any, MyGraphQLContext> =
-	async ({event, context}): Promise<MyGraphQLContext> => ({
+const generateContext: ContextFunction<{event: APIGatewayEvent}, MyGraphQLContext> =
+	async ({event}) => ({
 		auth: await getAuthContext(event, {
-            awsRegion: '',
-            userPoolId: ''		
-        })
-	});
+                awsRegion: '',
+                userPoolId: ''		
+            })
+    });
 
 export const handler = new ApolloServer({
 	context: generateContext,
@@ -28,5 +28,14 @@ export const handler = new ApolloServer({
 		auth: AuthDirective
 	}
 }).createHandler();
+```
 
+#### Requiring authentication
+```graphql
+type Query {
+
+    authRequiredQuery: MyResult @auth
+    adminGroupOnlyQuery: MyResult @auth(groups: ["admin"])
+
+}
 ```
