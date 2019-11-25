@@ -1,8 +1,8 @@
 export class User {
 
 	private readonly _anonymous: boolean;
+	private readonly _cognitoId: string;
 
-	private _cognitoId: string;
 	private _groups: Set<string>;
 
 	constructor(private _payload?: any) {
