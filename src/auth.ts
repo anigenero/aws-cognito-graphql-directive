@@ -8,14 +8,14 @@ const jwkToPem = require('jwk-to-pem');
 
 const _log = getLogger('');
 
-export interface IAuthConfig {
+export type AuthConfig = {
 
 	awsRegion: string;
 	userPoolId: string;
 
-}
+};
 
-export const getAuthContext = async (headers: { [name: string]: string }, {awsRegion, userPoolId}: IAuthConfig): Promise<User> => {
+export const getAuthContext = async (headers: { [name: string]: string }, {awsRegion, userPoolId}: AuthConfig): Promise<User> => {
 
 	const _issuer = `https://cognito-idp.${awsRegion}.amazonaws.com/${userPoolId}`;
 
@@ -94,7 +94,6 @@ export const getAuthContext = async (headers: { [name: string]: string }, {awsRe
 
 			const pems: any = {};
 			const keys = body.keys;
-			// tslint:disable-next-line:prefer-for-of
 			for (let i = 0; i < keys.length; i++) {
 				const KEY_ID = keys[i].kid;
 				pems[KEY_ID] = jwkToPem({
