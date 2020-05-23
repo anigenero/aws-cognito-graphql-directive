@@ -4,6 +4,7 @@
 /logs
 /src
 
+.eslintrc.json
 .travis.yml
 
 jest.setup.ts
@@ -12,6 +13,8 @@ jest.config.js
 
 tsconfig.json
 tslint.json
+
+codecov.yml
 
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md

@@ -1,4 +1,4 @@
-import {defaultFieldResolver, GraphQLField} from 'graphql';
+import {defaultFieldResolver, GraphQLField, GraphQLInterfaceType, GraphQLObjectType} from 'graphql';
 import {isArray} from 'lodash';
 import {AuthenticationError} from './auth.error';
 import {User} from './user';
@@ -6,8 +6,9 @@ import {SchemaDirectiveVisitor} from 'graphql-tools';
 
 export class AuthDirective extends SchemaDirectiveVisitor {
 
-    public visitFieldDefinition(field: GraphQLField<any, any>):
-        GraphQLField<any, any> | void | null {
+    public visitFieldDefinition(field: GraphQLField<any, any>, details: {
+        objectType: GraphQLObjectType | GraphQLInterfaceType;
+    }): GraphQLField<any, any> | void | null {
 
         const {resolve = defaultFieldResolver} = field;
         const {groups} = this.args;

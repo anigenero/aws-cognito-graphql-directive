@@ -1,6 +1,6 @@
 {
   "name": "aws-cognito-graphql-directive",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Directive to check authentication against AWS cognito",
   "keywords": [
     "aws",
