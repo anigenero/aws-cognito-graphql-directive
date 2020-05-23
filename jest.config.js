@@ -3,23 +3,13 @@ module.exports = {
         'lcov',
         'html'
     ],
-    coveragePathIgnorePatterns: [
-        '\\.(gql|graphql)$',
-        '<rootDir>/test',
-        '<rootDir>/src/assets/locale'
-    ],
     moduleFileExtensions: [
         'ts',
         'tsx',
         'js'
     ],
     preset: 'ts-jest',
-    setupFiles: [
-        '<rootDir>/jest.setup.ts'
-    ],
-    transform: {
-        '\\.(gql|graphql)$': '<rootDir>/jest.graphql.js'
-    },
+    setupFiles: [],
     coverageThreshold: {
         global: {
             branches: 80,
