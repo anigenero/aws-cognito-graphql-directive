@@ -2,7 +2,7 @@ import {defaultFieldResolver, GraphQLField} from 'graphql';
 import {isArray} from 'lodash';
 import {AuthenticationError} from './auth.error';
 import {User} from './user';
-import {SchemaDirectiveVisitor} from "graphql-tools";
+import {SchemaDirectiveVisitor} from 'graphql-tools';
 
 export class AuthDirective extends SchemaDirectiveVisitor {
 
