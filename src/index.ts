@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 
-export { AuthDirective } from './auth.directive';
-export { AuthenticationError } from './auth.error';
-export { AuthConfig, getAuthContext } from './auth';
-export { User } from './user';
+export {AuthDirective} from './auth.directive';
+export {AuthenticationError} from './auth.error';
+export {AuthConfig, getAuthContext} from './auth';
+export {User} from './user';
 
 export const authTypeDefs = gql`
     directive @auth(
