@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": false,
+    "esModuleInterop": true,
     "outDir": "./dist/",
     "sourceMap": false,
     "noImplicitAny": true,
@@ -19,7 +20,8 @@
     ]
   },
   "include": [
-    "./src/index.ts"
+    "./src/index.ts",
+    "./src/utils.ts"
   ],
   "exclude": [
     "node_modules",

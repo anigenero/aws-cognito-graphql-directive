@@ -7,6 +7,7 @@ export {User} from './user';
 
 export const authTypeDefs = gql`
     directive @auth(
+        anonymous: Boolean = false,
         groups: [String]
-    ) on FIELD_DEFINITION
+    ) on OBJECT | FIELD_DEFINITION
 `;

@@ -1,23 +1,27 @@
-import {defaultFieldResolver, GraphQLField, GraphQLInterfaceType, GraphQLObjectType} from 'graphql';
+import {defaultFieldResolver, GraphQLField} from 'graphql';
 import {isArray} from 'lodash';
 import {AuthenticationError} from './auth.error';
 import {User} from './user';
-import {SchemaDirectiveVisitor} from 'graphql-tools';
+import {SchemaDirectiveVisitor} from '@graphql-tools/utils';
 
-export class AuthDirective extends SchemaDirectiveVisitor {
+export type AuthContext = { auth: User };
+export type DirectiveArgs = {
+    anonymous: boolean;
+    groups: string[];
+};
 
-    public visitFieldDefinition(field: GraphQLField<any, any>, details: {
-        objectType: GraphQLObjectType | GraphQLInterfaceType;
-    }): GraphQLField<any, any> | void | null {
+export class AuthDirective<C extends AuthContext = AuthContext> extends SchemaDirectiveVisitor {
 
-        const {resolve = defaultFieldResolver} = field;
+    public visitFieldDefinition(
+        _field: GraphQLField<any, AuthContext, DirectiveArgs>
+    ): GraphQLField<any, any> | void | null {
+
+        const {resolve = defaultFieldResolver} = _field;
         const {groups} = this.args;
 
-        field.resolve = async function (...args: any[]): Promise<any> {
+        _field.resolve = function (...args: [any, any, AuthContext]): Promise<any> {
 
-            const [, , context] = args;
-            const auth: User = context.auth;
-
+            const [, , {auth}] = args;
             if (!auth.isAnonymous()) {
 
                 if (isArray(groups)) {
@@ -28,7 +32,8 @@ export class AuthDirective extends SchemaDirectiveVisitor {
                     });
                 }
 
-                return await resolve.apply(this, args);
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+                return resolve.apply(this, args);
 
             } else {
                 throw new AuthenticationError('Unauthorized access');

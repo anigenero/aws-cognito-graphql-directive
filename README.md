@@ -13,19 +13,19 @@ Directive to check authentication against AWS cognito
 
 ## Setup
 
+### Configuration
+
+
+### Using the Context Function
+
 ```typescript
 import { AuthDirective, authTypeDefs, getAuthContext } from 'aws-cognito-graphql-drective';
-
-const generateContext: ContextFunction<{event: APIGatewayEvent}, MyGraphQLContext> =
-	async ({event: {headers}}) => ({
-		auth: await getAuthContext(headers, {
-                awsRegion: '',
-                userPoolId: ''		
-            })
-    });
+import { merge } from 'lodash';
 
 export const handler = new ApolloServer({
-	context: generateContext,
+	context: async ({headers}) => ({ 
+            auth: await getAuthContext(headers, configuration) 
+        }),
 	typeDefs: merge(authTypeDefs, myTypeDefs),
 	// ..
 	schemaDirectives: {
@@ -38,8 +38,25 @@ export const handler = new ApolloServer({
 ```graphql
 type Query {
 
+    anonymousQuery: MyResult
     authRequiredQuery: MyResult @auth
     adminGroupOnlyQuery: MyResult @auth(groups: ["admin"])
 
 }
+```
+
+## Utilities
+
+This library includes utilities for easy, quick setup in common environments.
+
+#### Apollo Lambda w/ APIGateway
+
+```typescript
+import {generateLambdaContextFromAPIGateway} from 'aws-cognito-graphql-directive';
+
+new ApolloServer({
+    context: generateLambdaContextFromAPIGateway(configuration, {
+        // ... other context
+    })
+})
 ```

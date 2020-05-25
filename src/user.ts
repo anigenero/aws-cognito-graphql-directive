@@ -1,11 +1,20 @@
+export type DecodedPayload = {
+    sub: string;
+    ['cognito:groups']: string[];
+};
+
 export class User {
+
+    public static fromIdentity(identityId: string): User {
+        return new User(null, identityId);
+    }
 
     private readonly _anonymous: boolean;
     private readonly _cognitoId: string;
 
     private _groups: Set<string>;
 
-    constructor(private _payload?: any) {
+    constructor(private _payload?: DecodedPayload, private _identityId?: string) {
 
         if (_payload) {
 
@@ -21,6 +30,10 @@ export class User {
 
     public getCognitoId(): string {
         return this._cognitoId;
+    }
+
+    public getIdentityId(): string {
+        return this._identityId;
     }
 
     public getPayload(): any {
